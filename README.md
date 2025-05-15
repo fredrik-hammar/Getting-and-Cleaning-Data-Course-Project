@@ -15,8 +15,9 @@ See instructions in [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
     - [ ] Transformations
     - [ ] Other work
 - [ ] [`run_analysis.R`](run_analysis.R)
-  - [ ] Merge the training and the test sets
-  - [ ] Extract the measurements on the mean and standard deviation for each
+  - [x] Download data set
+  - [x] Merge the training and the test sets
+  - [x] Extract the measurements on the mean and standard deviation for each
         measurement
   - [ ] Give descriptive names to the activities in the data set
   - [ ] Labels the data set with descriptive variable names
