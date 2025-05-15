@@ -1,5 +1,6 @@
-library(readr)
 library(here)
+library(readr)
+library(dplyr)
 
 basename <- "UCI HAR Dataset"
 filename <- paste(basename, "zip", sep = ".")
@@ -28,18 +29,22 @@ features <- read_table(fs::path(dataset_path, "features.txt"),
                        col_types = "ic")
 features <- make.unique(features$feature, sep = "_")
 
-x_train <- read_table(here(dataset_path, "train", "X_train.txt"),
-                      col_names = features,
-                      col_types = cols(.default = col_double()))
+activites <- read_table(fs::path(dataset_path, "activity_labels.txt"),
+                       col_names = c("index", "activity"),
+                       col_types = "ic")
 
-x_test <- read_table(here(dataset_path, "test", "X_test.txt"),
-                      col_names = features,
-                      col_types = cols(.default = col_double()))
+read_dataset <- function(set) {
+  x <- read_table(here(dataset_path, set, paste0("X_", set, ".txt")),
+                  col_names = features,
+                  col_types = cols(.default = col_double()))
+  y <- read_table(here(dataset_path, set, paste0("y_", set, ".txt")),
+                  col_names = "activity",
+                  col_types = "i")
 
+  # Give descriptive names to the activities in the data set
+  y <- mutate(y, activity = activites[activity, "activity"])
+  bind_cols(x, y)
+}
 
-har <- rbind(x_train, x_test)
-
-mean_cols <- grep('mean()', features, fixed = TRUE)
-std_cols <- grep('std()', features, fixed = TRUE)
-
-har <- har[, c(mean_cols, std_cols)]
+har <- bind_rows(read_dataset("train"), read_dataset("test"))
+har <- select(har, contains("mean()"), contains("std()"), "activity")

@@ -19,8 +19,8 @@ See instructions in [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
   - [x] Merge the training and the test sets
   - [x] Extract the measurements on the mean and standard deviation for each
         measurement
-  - [ ] Give descriptive names to the activities in the data set
-  - [ ] Labels the data set with descriptive variable names
+  - [x] Give descriptive names to the activities in the data set
+  - [x] Labels the data set with descriptive variable names
   - [ ] Create second, independent tidy data set with the average of each
         variable for each activity and each subject.
 - [ ] Submit
