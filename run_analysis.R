@@ -40,11 +40,15 @@ read_dataset <- function(set) {
   y <- read_table(here(dataset_path, set, paste0("y_", set, ".txt")),
                   col_names = "activity",
                   col_types = "i")
-
   # Give descriptive names to the activities in the data set
   y <- mutate(y, activity = activites[activity, "activity"])
-  bind_cols(x, y)
+
+  subjects <- read_table(here(dataset_path, set, paste0("subject_", set, ".txt")),
+                         col_names = "subject",
+                         col_types = "i")
+
+  bind_cols(x, y, subjects)
 }
 
 har <- bind_rows(read_dataset("train"), read_dataset("test"))
-har <- select(har, contains("mean()"), contains("std()"), "activity")
+har <- select(har, contains("mean()"), contains("std()"), "activity", "subject")
