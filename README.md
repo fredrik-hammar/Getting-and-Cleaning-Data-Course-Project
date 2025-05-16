@@ -23,7 +23,7 @@ See instructions in [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
   - [x] Labels the data set with descriptive variable names
   - [x] Create second, independent tidy data set with the average of each
         variable for each activity and each subject
-  - [ ] Save as `txt` file created with `write.table()` using `row.name=FALSE`
+  - [x] Save as `txt` file created with `write.table()` using `row.name=FALSE`
 - [ ] Submit
   - [ ] Project title: *Getting and Cleaning Data Course Project*
   - [ ] Link to GitHub repository:

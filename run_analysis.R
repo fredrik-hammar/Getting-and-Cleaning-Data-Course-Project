@@ -38,10 +38,11 @@ read_dataset <- function(set) {
                   col_names = features,
                   col_types = cols(.default = col_double()))
   y <- read_table(here(dataset_path, set, paste0("y_", set, ".txt")),
-                  col_names = "activity",
+                  col_names = "index",
                   col_types = "i")
+
   # Give descriptive names to the activities in the data set
-  y <- mutate(y, activity = activites[activity, "activity"])
+  y <- inner_join(y, activites, by = join_by(index)) %>% select(activity)
 
   subjects <- read_table(here(dataset_path, set, paste0("subject_", set, ".txt")),
                          col_names = "subject",
@@ -52,12 +53,12 @@ read_dataset <- function(set) {
 
 har <- bind_rows(read_dataset("train"), read_dataset("test"))
 har <- select(har, contains("mean()"), contains("std()"), "activity", "subject")
-har <- group_by(har, subject, activity)
+har <- group_by(har, activity, subject)
 
-cols <- names(har)[1:(length(names(har))-2)]
-means <- lapply(cols, function (col) {
-  x <- summarize(har, val = mean(.data[[col]]))
-  names(x)[names(x) == 'val'] <- col
-  x[, 3]
-})
-means <- bind_cols(summarize(har), means)
+means <- summarize(har, across(everything(), mean), .groups = "drop")
+if(!dir.exists("out")) {
+  dir.create("out")
+}
+write.table(ungroup(means),
+            file = here("out", paste(basename, "Means.txt", sep = " ")),
+            row.names = FALSE)
