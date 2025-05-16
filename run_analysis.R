@@ -52,3 +52,12 @@ read_dataset <- function(set) {
 
 har <- bind_rows(read_dataset("train"), read_dataset("test"))
 har <- select(har, contains("mean()"), contains("std()"), "activity", "subject")
+har <- group_by(har, subject, activity)
+
+cols <- names(har)[1:(length(names(har))-2)]
+means <- lapply(cols, function (col) {
+  x <- summarize(har, val = mean(.data[[col]]))
+  names(x)[names(x) == 'val'] <- col
+  x[, 3]
+})
+means <- bind_cols(summarize(har), means)

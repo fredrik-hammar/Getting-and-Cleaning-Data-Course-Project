@@ -21,7 +21,7 @@ See instructions in [`INSTRUCTIONS.md`](INSTRUCTIONS.md).
         measurement
   - [x] Give descriptive names to the activities in the data set
   - [x] Labels the data set with descriptive variable names
-  - [ ] Create second, independent tidy data set with the average of each
+  - [x] Create second, independent tidy data set with the average of each
         variable for each activity and each subject
   - [ ] Save as `txt` file created with `write.table()` using `row.name=FALSE`
 - [ ] Submit
