@@ -3,7 +3,7 @@ library(readr)
 library(dplyr)
 
 basename <- "UCI HAR Dataset"
-filename <- paste(basename, "zip", sep = ".")
+filename <- fs::path(basename, ext = "zip")
 url <- paste(
   "https://d396qusza40orc.cloudfront.net/getdata",
   URLencode(paste("/projectfiles",
