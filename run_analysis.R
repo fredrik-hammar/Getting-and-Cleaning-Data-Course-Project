@@ -12,28 +12,48 @@ url <- paste(
   sep = "/"
 )
 
-if(!dir.exists("data")) {
-  dir.create("data")
+main <- function() {
+  dataset_path <- download_dataset()
+  features <- read_features()
+  activites <- read_activities()
+  har <- read_all_datasets(features, activites)
+  means <- summarize(har, across(everything(), mean), .groups = "drop")
+  write_means_dataset(means)
 }
 
-path <- fs::path("data", filename)
-if(!file.exists(path)) {
-  download.file(url, fs::path("data", filename))
+download_dataset <- function() {
+  if(!dir.exists("data")) {
+    dir.create("data")
+  }
+  
+  path <- fs::path("data", filename)
+  if(!file.exists(path)) {
+    download.file(url, fs::path("data", filename))
+  }
+  
+  unzip(path, exdir = "data")
+  fs::path("data", basename)
 }
 
-unzip(path, exdir = "data")
+read_features <- function() {
+  read_table(fs::path(dataset_path, "features.txt"),
+             col_names = c("index", "feature"),
+             col_types = "ic") %>%
+    .$feature %>%
+    make.unique(sep = "_")
+}
 
-dataset_path <- fs::path("data", basename)
-features <- read_table(fs::path(dataset_path, "features.txt"),
-                       col_names = c("index", "feature"),
-                       col_types = "ic")
-features <- make.unique(features$feature, sep = "_")
+read_activities <- function() {
+  read_table(fs::path(dataset_path, "activity_labels.txt"),
+                         col_names = c("index", "activity"),
+                         col_types = "ic")
+}
 
-activites <- read_table(fs::path(dataset_path, "activity_labels.txt"),
-                       col_names = c("index", "activity"),
-                       col_types = "ic")
-
-read_dataset <- function(set) {
+#' Read training or test data from UCI HAR Dataset.
+#' 
+#' @param set `"train"` or `"test`
+#' @returns Data as a tibble
+read_dataset <- function(set, features, activities) {
   x <- read_table(here(dataset_path, set, paste0("X_", set, ".txt")),
                   col_names = features,
                   col_types = cols(.default = col_double()))
@@ -51,14 +71,20 @@ read_dataset <- function(set) {
   bind_cols(x, y, subjects)
 }
 
-har <- bind_rows(read_dataset("train"), read_dataset("test"))
-har <- select(har, contains("mean()"), contains("std()"), "activity", "subject")
-har <- group_by(har, activity, subject)
-
-means <- summarize(har, across(everything(), mean), .groups = "drop")
-if(!dir.exists("out")) {
-  dir.create("out")
+read_all_datasets <- function(features, activites) {
+  bind_rows(read_dataset("train", features, activites),
+            read_dataset("test", features, activites)) %>%
+    select(contains("mean()"), contains("std()"), "activity", "subject") %>%
+    group_by(activity, subject)
 }
-write.table(ungroup(means),
-            file = here("out", paste(basename, "Means.txt", sep = " ")),
-            row.names = FALSE)
+
+write_means_dataset <- function(means) {
+  if(!dir.exists("out")) {
+    dir.create("out")
+  }
+  write.table(ungroup(means),
+              file = here("out", paste(basename, "Means.txt", sep = " ")),
+              row.names = FALSE)
+}
+
+main()
