@@ -17,12 +17,9 @@ url <- paste(
 main <- function() {
   dir <- download_dataset(into = here("data"))
   features <- read_features(dir)
-  activites <- read_activities(dir)
-  # TODO: Function for tidying data with comment explaining why it's tidy
-  har <- read_all_datasets(dir, features, activites) %>%
-    select(contains("mean()"), contains("std()"), "activity", "subject") %>%
-    group_by(activity, subject)
-  means <- summarize(har, across(everything(), mean), .groups = "drop")
+  activities <- read_activities(dir)
+  har <- read_all_datasets(dir, features, activities)
+  means <- tidy_means_dataset(har)
   write_means_dataset(means, into = here("out"))
 }
 
@@ -97,6 +94,27 @@ read_dataset <- function(dir, set, features, activities) {
                          col_types = "i")
 
   bind_cols(x, y, subjects)
+}
+
+#' Get average of each mean and standard deviation variable from
+#' HAR dataset by each activity and subject.
+#' 
+#' It follows the tidy data rules
+#' 
+#' - Each variable must have its own column.
+#' - Each observation must have its own row.
+#' - Each value must have its own cell.
+#'
+#' The axis of each varible could be considered a variable but it would
+#' split each observation into multiple rows.
+#'
+#' @param har HAR Dataset with all features, activity, and subject
+#' @returns Tidy data as a tibble
+tidy_means_dataset <- function(har) {
+  har %>%
+    select(contains("mean()"), contains("std()"), "activity", "subject") %>%
+    group_by(activity, subject) %>%
+    summarize(across(everything(), mean), .groups = "drop")
 }
 
 #' Write dataset to file `UCI HAR Dataset Means.txt`.

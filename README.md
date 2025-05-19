@@ -53,7 +53,7 @@ at Coursera.
   - [x] Create second, independent tidy data set with the average of each
         variable for each activity and each subject
   - [x] Save as `txt` file created with `write.table()` using `row.name=FALSE`
-  - [ ] Refactor and comment
+  - [x] Refactor and comment
 - [ ] Submit
   - [ ] Project title: *Getting and Cleaning Data Course Project*
   - [ ] Link to GitHub repository:
