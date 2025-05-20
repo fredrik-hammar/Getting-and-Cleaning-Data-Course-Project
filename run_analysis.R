@@ -2,15 +2,9 @@ library(here)  # Used to get paths relative to this script.
 library(readr)
 library(dplyr)
 
-basename <- "UCI HAR Dataset"
-filename <- fs::path(basename, ext = "zip")
-url <- paste(
+url <- paste0(
   "https://d396qusza40orc.cloudfront.net/getdata",
-  URLencode(paste("/projectfiles",
-                  filename, sep = "/"),
-            reserved = TRUE),
-  sep = "/"
-)
+  URLencode("/projectfiles/UCI HAR Dataset.zip"))
 
 # Files used by script.
 input_dir            <- here("data")
@@ -46,15 +40,15 @@ main <- function() {
 
 #' Download UCI HAR Dataset
 download_dataset <- function() {
-  if(!dir.exists(output_dir)) {
-    dir.create(output_dir)
+  if(!dir.exists(input_dir)) {
+    dir.create(input_dir)
   }
   
   if(!file.exists(har_zip_file)) {
     download.file(url, har_zip_file)
   }
 
-  unzip(har_zip_file, exdir = output_dir)
+  unzip(har_zip_file, exdir = input_dir)
 }
 
 #' Read features data from UCI HAR Dataset.
