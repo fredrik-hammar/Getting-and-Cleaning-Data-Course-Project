@@ -53,8 +53,6 @@ download_dataset <- function() {
 
 #' Read features data from UCI HAR Dataset.
 #' These are made unique so they can be used as column names for dataset.
-#' 
-#' @param dir Dataset directory
 #' @returns Data as a tibble
 read_features <- function() {
   read_table(feature_labels_file,
@@ -67,8 +65,6 @@ read_features <- function() {
 #' Read activity label data from UCI HAR Dataset.
 #' These can be used to give human readable labels to activities performed in
 #' the training or test datasets.
-#' 
-#' @param dir Dataset directory
 #' @returns Data as a tibble
 read_activities <- function() {
   read_table(activity_labels_file,
@@ -78,7 +74,6 @@ read_activities <- function() {
 
 #' Read both training and test data from UCI HAR Dataset.
 #' @seealso [read_dataset()]
-#' @param dir Dataset directory
 read_all_datasets <- function(...) {
   bind_rows(read_dataset(training_set, ...),
             read_dataset(test_set, ...))
@@ -86,7 +81,6 @@ read_all_datasets <- function(...) {
 
 #' Read training or test data from UCI HAR Dataset.
 #' 
-#' @param dir Dataset directory
 #' @param set `"train"` or `"test`
 #' @param features Features as read by [read_features()]
 #' @param activities Activities as read by [read_activities()]
@@ -131,7 +125,6 @@ tidy_means_dataset <- function(har) {
 }
 
 #' Write dataset to file `UCI HAR Dataset Means.txt`.
-#' @param into Target directory
 write_means_dataset <- function(means) {
   if(!dir.exists(output_dir)) {
     dir.create(output_dir)
