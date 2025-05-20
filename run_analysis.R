@@ -13,7 +13,7 @@ har_dir              <- here("input/UCI HAR Dataset")
 activity_labels_file <- here("input/UCI HAR Dataset/activity_labels.txt")
 feature_labels_file  <- here("input/UCI HAR Dataset/features.txt")
 output_dir           <- here("output")
-output_means         <- here("output/UCI HAR Dataset Means.txt")
+output_averages      <- here("output/UCI HAR Dataset Averages.txt")
 
 training_set <- list(
   accelerometer = "input/UCI HAR Dataset/train/X_train.txt",
@@ -130,7 +130,7 @@ write_means_dataset <- function(means) {
     dir.create(output_dir)
   }
   write.table(ungroup(means),
-              file = output_means,
+              file = output_averages,
               row.names = FALSE)
 }
 
