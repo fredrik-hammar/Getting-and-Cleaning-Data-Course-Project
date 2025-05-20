@@ -12,30 +12,49 @@ url <- paste(
   sep = "/"
 )
 
+# Files used by script.
+input_dir            <- here("data")
+har_zip_file         <- here("data/UCI HAR Dataset.zip")
+har_dir              <- here("data/UCI HAR Dataset")
+activity_labels_file <- here("data/UCI HAR Dataset/activity_labels.txt")
+feature_labels_file  <- here("data/UCI HAR Dataset/features.txt")
+output_dir           <- here("out")
+output_means         <- here("out/UCI HAR Dataset Means.txt")
+
+training_set <- list(
+  accelerometer = "data/UCI HAR Dataset/train/X_train.txt",
+  activity = "data/UCI HAR Dataset/train/y_train.txt",
+  subject = "data/UCI HAR Dataset/train/subject_train.txt"
+)
+test_set <- list(
+  accelerometer = "data/UCI HAR Dataset/test/X_test.txt",
+  activity = "data/UCI HAR Dataset/test/y_test.txt",
+  subject = "data/UCI HAR Dataset/test/subject_test.txt"
+)
+
+
 #' Main function of this script.
 #' Called at end of script. 
 main <- function() {
-  dir <- download_dataset(into = here("data"))
-  features <- read_features(dir)
-  activities <- read_activities(dir)
-  har <- read_all_datasets(dir, features, activities)
+  download_dataset()
+  features <- read_features()
+  activities <- read_activities()
+  har <- read_all_datasets(features, activities)
   means <- tidy_means_dataset(har)
-  write_means_dataset(means, into = here("out"))
+  write_means_dataset(means)
 }
 
 #' Download UCI HAR Dataset
-download_dataset <- function(into) {
-  if(!dir.exists(into)) {
-    dir.create(into)
+download_dataset <- function() {
+  if(!dir.exists(output_dir)) {
+    dir.create(output_dir)
   }
   
-  path <- fs::path(into, filename)
-  if(!file.exists(path)) {
-    download.file(url, fs::path(into, filename))
+  if(!file.exists(har_zip_file)) {
+    download.file(url, har_zip_file)
   }
-  
-  unzip(path, exdir = into)
-  fs::path(into, basename)
+
+  unzip(har_zip_file, exdir = output_dir)
 }
 
 #' Read features data from UCI HAR Dataset.
@@ -43,8 +62,8 @@ download_dataset <- function(into) {
 #' 
 #' @param dir Dataset directory
 #' @returns Data as a tibble
-read_features <- function(dir) {
-  read_table(fs::path(dir, "features.txt"),
+read_features <- function() {
+  read_table(feature_labels_file,
              col_names = c("index", "feature"),
              col_types = "ic") %>%
     .$feature %>%
@@ -57,8 +76,8 @@ read_features <- function(dir) {
 #' 
 #' @param dir Dataset directory
 #' @returns Data as a tibble
-read_activities <- function(dir) {
-  read_table(fs::path(dir, "activity_labels.txt"),
+read_activities <- function() {
+  read_table(activity_labels_file,
              col_names = c("index", "activity"),
              col_types = "ic")
 }
@@ -66,9 +85,9 @@ read_activities <- function(dir) {
 #' Read both training and test data from UCI HAR Dataset.
 #' @seealso [read_dataset()]
 #' @param dir Dataset directory
-read_all_datasets <- function(dir, ...) {
-  bind_rows(read_dataset(dir, "train", ...),
-            read_dataset(dir, "test", ...))
+read_all_datasets <- function(...) {
+  bind_rows(read_dataset(training_set, ...),
+            read_dataset(test_set, ...))
 }
 
 #' Read training or test data from UCI HAR Dataset.
@@ -78,18 +97,18 @@ read_all_datasets <- function(dir, ...) {
 #' @param features Features as read by [read_features()]
 #' @param activities Activities as read by [read_activities()]
 #' @returns Data as a tibble
-read_dataset <- function(dir, set, features, activities) {
-  x <- read_table(here(dir, set, paste0("X_", set, ".txt")),
+read_dataset <- function(set, features, activities) {
+  x <- read_table(set$accelerometer,
                   col_names = features,
                   col_types = cols(.default = col_double()))
-  y <- read_table(here(dir, set, paste0("y_", set, ".txt")),
+  y <- read_table(set$activity,
                   col_names = "index",
                   col_types = "i")
 
   # Give descriptive names to the activities in the data set
   y <- inner_join(y, activities, by = join_by(index)) %>% select(activity)
 
-  subjects <- read_table(here(dir, set, paste0("subject_", set, ".txt")),
+  subjects <- read_table(set$subject,
                          col_names = "subject",
                          col_types = "i")
 
@@ -119,12 +138,12 @@ tidy_means_dataset <- function(har) {
 
 #' Write dataset to file `UCI HAR Dataset Means.txt`.
 #' @param into Target directory
-write_means_dataset <- function(means, into) {
-  if(!dir.exists(into)) {
-    dir.create(into)
+write_means_dataset <- function(means) {
+  if(!dir.exists(output_dir)) {
+    dir.create(output_dir)
   }
   write.table(ungroup(means),
-              file = fs::path(into, paste(basename, "Means.txt", sep = " ")),
+              file = output_means,
               row.names = FALSE)
 }
 
