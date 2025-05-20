@@ -7,23 +7,23 @@ url <- paste0(
   URLencode("/projectfiles/UCI HAR Dataset.zip"))
 
 # Files used by script.
-input_dir            <- here("data")
-har_zip_file         <- here("data/UCI HAR Dataset.zip")
-har_dir              <- here("data/UCI HAR Dataset")
-activity_labels_file <- here("data/UCI HAR Dataset/activity_labels.txt")
-feature_labels_file  <- here("data/UCI HAR Dataset/features.txt")
-output_dir           <- here("out")
-output_means         <- here("out/UCI HAR Dataset Means.txt")
+input_dir            <- here("input")
+har_zip_file         <- here("input/UCI HAR Dataset.zip")
+har_dir              <- here("input/UCI HAR Dataset")
+activity_labels_file <- here("input/UCI HAR Dataset/activity_labels.txt")
+feature_labels_file  <- here("input/UCI HAR Dataset/features.txt")
+output_dir           <- here("output")
+output_means         <- here("output/UCI HAR Dataset Means.txt")
 
 training_set <- list(
-  accelerometer = "data/UCI HAR Dataset/train/X_train.txt",
-  activity = "data/UCI HAR Dataset/train/y_train.txt",
-  subject = "data/UCI HAR Dataset/train/subject_train.txt"
+  accelerometer = "input/UCI HAR Dataset/train/X_train.txt",
+  activity = "input/UCI HAR Dataset/train/y_train.txt",
+  subject = "input/UCI HAR Dataset/train/subject_train.txt"
 )
 test_set <- list(
-  accelerometer = "data/UCI HAR Dataset/test/X_test.txt",
-  activity = "data/UCI HAR Dataset/test/y_test.txt",
-  subject = "data/UCI HAR Dataset/test/subject_test.txt"
+  accelerometer = "input/UCI HAR Dataset/test/X_test.txt",
+  activity = "input/UCI HAR Dataset/test/y_test.txt",
+  subject = "input/UCI HAR Dataset/test/subject_test.txt"
 )
 
 

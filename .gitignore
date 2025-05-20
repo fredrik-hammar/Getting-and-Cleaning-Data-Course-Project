@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 *.html
-data/
-out/
+input/
+output/
