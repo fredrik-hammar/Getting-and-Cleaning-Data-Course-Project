@@ -43,7 +43,7 @@ at Coursera.
     - [ ] Data
     - [ ] Transformations
     - [ ] Other work
-- [ ] [`run_analysis.R`](run_analysis.R)
+- [x] [`run_analysis.R`](run_analysis.R)
   - [x] Download data set
   - [x] Merge the training and the test sets
   - [x] Extract the measurements on the mean and standard deviation for each
@@ -54,7 +54,7 @@ at Coursera.
         variable for each activity and each subject
   - [x] Save as `txt` file created with `write.table()` using `row.name=FALSE`
   - [x] Refactor and comment
-  - [ ] Clearer file handling
+  - [x] Clearer file handling
 - [ ] Submit
   - [ ] Project title: *Getting and Cleaning Data Course Project*
   - [ ] Link to GitHub repository:
