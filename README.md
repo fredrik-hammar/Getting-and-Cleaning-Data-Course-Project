@@ -29,34 +29,3 @@ at Coursera.
 | `data/UCI HAR Dataset/test/subject_test.txt`   | Subjects for each measurement in `X_test.txt`                               |
 | `out`                                          | Output data directory populated by `run_analysis.R`                         |
 | `out/UCI HAR Dataset Averages.txt`             | Tidy dataset of averages of `mean()` and `std()` by activity and subject    |
-
-
-## TODO
-
-- [x] [`README.md`](README.md)
-  - [x] Create stub
-  - [x] Describe all files and how they are connected
-- [x] [`CodeBook.md`](CodeBook.md)
-  - [x] Create stub
-  - [x] Describe following points performed to clean up the data
-    - [x] Variables and units
-    - [x] Data
-    - [x] Transformations
-    - [x] Other work
-- [x] [`run_analysis.R`](run_analysis.R)
-  - [x] Download data set
-  - [x] Merge the training and the test sets
-  - [x] Extract the measurements on the mean and standard deviation for each
-        measurement
-  - [x] Give descriptive names to the activities in the data set
-  - [x] Labels the data set with descriptive variable names
-  - [x] Create second, independent tidy data set with the average of each
-        variable for each activity and each subject
-  - [x] Save as `txt` file created with `write.table()` using `row.name=FALSE`
-  - [x] Refactor and comment
-  - [x] Clearer file handling
-- [ ] Submit
-  - [ ] Project title: *Getting and Cleaning Data Course Project*
-  - [ ] Link to GitHub repository:
-        `https://github.com/fredrik-hammar/Getting-and-Cleaning-Data-Course-Project`
-  - [ ] Tidy data `txt` file
