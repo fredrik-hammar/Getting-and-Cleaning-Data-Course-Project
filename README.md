@@ -8,10 +8,10 @@ at Coursera.
 
 | File                                           | Details                                                                     |
 | ---------------------------------------------- | --------------------------------------------------------------------------- |
-| `README.md`                                    | This README file                                                            |
-| `INSTRUCTIONS.md`                              | Original assignment instructions                                            |
-| `CodeBook.md`                                  | Code book for variables and summaries of `out/UCI HAR Dataset Averages.txt` |
-| `run_analysis.R`                               | R script file that performs analysis described in `INSTRUCTIONS.md`         |
+| [`README.md`](README.md)                       | This README file                                                            |
+| [`INSTRUCTIONS.md`](INSTRUCTIONS.md)           | Original assignment instructions                                            |
+| [`CodeBook.md`](CodeBook.md)                   | Code book for variables and summaries of `out/UCI HAR Dataset Averages.txt` |
+| [`run_analysis.R`](run_analysis.R)             | R script file that performs analysis described in `INSTRUCTIONS.md`         |
 | `data`                                         | Input data directory populated by `run_analysis.R`                          |
 | `data/UCI HAR Dataset.zip`                     | Downloaded UCI HAR Dataset                                                  |
 | `data/UCI HAR Dataset`                         | Extracted UCI HAR Dataset                                                   |
