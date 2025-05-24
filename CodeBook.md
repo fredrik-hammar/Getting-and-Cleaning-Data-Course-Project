@@ -40,10 +40,10 @@ following steps:
 
 1. Download data set
 2. For each training and test dataset:
-  a. Match each column with feature name
-  b. Match each row with activity number
-  c. Match each activity number with activity label
-  d. Match each row with subject number.
+    1. Match each column with feature name
+    2. Match each row with activity number
+    3. Match each activity number with activity label
+    4. Match each row with subject number.
 3. Concatenate the training and the test sets
 4. Extract the measurements on the mean and standard deviation for each
    observation by selecting variables with `std()` or `mean()` in their names
