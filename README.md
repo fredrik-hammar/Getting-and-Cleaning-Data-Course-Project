@@ -6,43 +6,43 @@ at Coursera.
 
 ## File Manifest
 
-| File                                           | Details                                                                  |
-| ---------------------------------------------- | ------------------------------------------------------------------------ |
-| `README.md`                                    | This README file                                                         |
-| `INSTRUCTIONS.md`                              | Original assignment instructions                                         |
-| `CodeBook.md`                                  | Code book for variables and summaries of `out/UCI HAR Dataset Means.txt` |
-| `run_analysis.R`                               | R script file that performs analysis described in `INSTRUCTIONS.md`      |
-| `data`                                         | Input data directory populated by `run_analysis.R`                       |
-| `data/UCI HAR Dataset.zip`                     | Downloaded UCI HAR Dataset                                               |
-| `data/UCI HAR Dataset`                         | Extracted UCI HAR Dataset                                                |
-| `data/UCI HAR Dataset/README.txt`              | UCI HAR Dataset README file                                              |
-| `data/UCI HAR Dataset/activity_labels.txt`     | Activity labels                                                          |
-| `data/UCI HAR Dataset/features.txt`            | Features, or variables, of `X_train` and `X_test`                        |
-| `data/UCI HAR Dataset/features_info.txt`       | Details about the features                                               |
-| `data/UCI HAR Dataset/train`                   | The training data set directory                                          |
-| `data/UCI HAR Dataset/train/X_train.txt`       | HAR training measurements                                                |
-| `data/UCI HAR Dataset/train/y_train.txt`       | Activity number of each measurement in `X_train.txt`                     |
-| `data/UCI HAR Dataset/train/subject_train.txt` | Subjects for each measurement in `X_test.txt`                            |
-| `data/UCI HAR Dataset/test`                    | The test data set directory                                              |
-| `data/UCI HAR Dataset/test/X_test.txt`         | HAR test measurements                                                    |
-| `data/UCI HAR Dataset/test/y_test.txt`         | Activity number of each measurement in `X_test.txt`                      |
-| `data/UCI HAR Dataset/test/subject_test.txt`   | Subjects for each measurement in `X_test.txt`                            |
-| `out`                                          | Output data directory populated by `run_analysis.R`                      |
-| `out/UCI HAR Dataset Means.txt`                | Tidy dataset of mean of `mean()` and `std()` by activity and subject     |
+| File                                           | Details                                                                     |
+| ---------------------------------------------- | --------------------------------------------------------------------------- |
+| `README.md`                                    | This README file                                                            |
+| `INSTRUCTIONS.md`                              | Original assignment instructions                                            |
+| `CodeBook.md`                                  | Code book for variables and summaries of `out/UCI HAR Dataset Averages.txt` |
+| `run_analysis.R`                               | R script file that performs analysis described in `INSTRUCTIONS.md`         |
+| `data`                                         | Input data directory populated by `run_analysis.R`                          |
+| `data/UCI HAR Dataset.zip`                     | Downloaded UCI HAR Dataset                                                  |
+| `data/UCI HAR Dataset`                         | Extracted UCI HAR Dataset                                                   |
+| `data/UCI HAR Dataset/README.txt`              | UCI HAR Dataset README file                                                 |
+| `data/UCI HAR Dataset/activity_labels.txt`     | Activity labels                                                             |
+| `data/UCI HAR Dataset/features.txt`            | Features, or variables, of `X_train` and `X_test`                           |
+| `data/UCI HAR Dataset/features_info.txt`       | Details about the features                                                  |
+| `data/UCI HAR Dataset/train`                   | The training data set directory                                             |
+| `data/UCI HAR Dataset/train/X_train.txt`       | HAR training measurements                                                   |
+| `data/UCI HAR Dataset/train/y_train.txt`       | Activity number of each measurement in `X_train.txt`                        |
+| `data/UCI HAR Dataset/train/subject_train.txt` | Subjects for each measurement in `X_test.txt`                               |
+| `data/UCI HAR Dataset/test`                    | The test data set directory                                                 |
+| `data/UCI HAR Dataset/test/X_test.txt`         | HAR test measurements                                                       |
+| `data/UCI HAR Dataset/test/y_test.txt`         | Activity number of each measurement in `X_test.txt`                         |
+| `data/UCI HAR Dataset/test/subject_test.txt`   | Subjects for each measurement in `X_test.txt`                               |
+| `out`                                          | Output data directory populated by `run_analysis.R`                         |
+| `out/UCI HAR Dataset Averages.txt`             | Tidy dataset of averages of `mean()` and `std()` by activity and subject    |
 
 
 ## TODO
 
-- [ ] [`README.md`](README.md)
+- [x] [`README.md`](README.md)
   - [x] Create stub
   - [x] Describe all files and how they are connected
-- [ ] [`CodeBook.md`](CodeBook.md)
+- [x] [`CodeBook.md`](CodeBook.md)
   - [x] Create stub
-  - [ ] Describe following points performed to clean up the data
-    - [ ] Variables and units
-    - [ ] Data
-    - [ ] Transformations
-    - [ ] Other work
+  - [x] Describe following points performed to clean up the data
+    - [x] Variables and units
+    - [x] Data
+    - [x] Transformations
+    - [x] Other work
 - [x] [`run_analysis.R`](run_analysis.R)
   - [x] Download data set
   - [x] Merge the training and the test sets
